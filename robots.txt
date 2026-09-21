@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hanru269.github.io/eaa-scan/sitemap.xml
