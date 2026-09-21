@@ -2,14 +2,14 @@
 <meta name="description" content="What the EAA-Scan user agent is, what it does, and how to opt out."><link rel="canonical" href="https://hanru269.github.io/eaa-scan/bot.html"><style>:root{--bg:#f7f8fb;--fg:#161d2e;--mut:#59647a;--ac:#0b6e63;--card:#fff;--bd:#dbe1ec;--hi:#e9f5f3}
 @media(prefers-color-scheme:dark){:root{--bg:#0e1420;--fg:#e8edf7;--mut:#9aa7bf;--ac:#4fd1bd;--card:#151d2e;--bd:#26324a;--hi:#12261f}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 Georgia,'Iowan Old Style',serif}
-header,main,footer{max-width:780px;margin:0 auto;padding:0 20px}header{padding-top:22px;display:flex;gap:18px;flex-wrap:wrap;font:600 15px system-ui,sans-serif}
+header,main,footer{max-width:780px;margin:0 auto;padding:0 20px}header{padding-top:22px;display:flex;gap:8px 18px;flex-wrap:wrap;font:600 15px system-ui,sans-serif}
 header a{color:var(--ac);text-decoration:none}h1{font:800 34px/1.15 system-ui,sans-serif;margin:26px 0 8px}h2{font:700 22px system-ui,sans-serif;margin:34px 0 8px}
 p,li{max-width:66ch}a{color:var(--ac)}.lead{font-size:19px;color:var(--mut)}.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;margin:14px 0}
 .cta{display:inline-block;background:var(--ac);color:var(--bg);padding:10px 18px;border-radius:8px;font:700 16px system-ui,sans-serif;text-decoration:none;margin:6px 8px 6px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.big{font:800 34px system-ui,sans-serif;color:var(--ac)}
-table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif}td,th{border-bottom:1px solid var(--bd);padding:8px;text-align:left}.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif}td,th{border-bottom:1px solid var(--bd);padding:8px;text-align:left}.tw{overflow-x:auto}.tw:focus-visible,pre:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .note{background:var(--hi);border-left:4px solid var(--ac);padding:10px 14px;border-radius:4px}footer{color:var(--mut);font:14px system-ui,sans-serif;padding:34px 20px 50px}</style></head><body>
-<header><a href="index.html">EAA-Scan</a><a href="guide.html">EAA guide for online shops</a><a href="study.html">EU shops study</a><a href="bot.html">About the scan bot</a></header>
+<header><a href="index.html">EAA-Scan</a><a href="guide.html">EAA guide</a><a href="contrast-checker.html">Contrast checker</a><a href="fix-low-contrast.html">Fix contrast</a><a href="alt-text-product-images.html">Alt text</a><a href="study.html">EU shops study</a><a href="bot.html">Scan bot</a></header>
 <main>
 <h1>About the EAA-Scan bot</h1>
 <p>If you saw <code>EAA-Scan/1.0</code> in your server logs: it loads a single public page in a headless browser, exactly as a visitor's browser would, and runs the open-source axe-core accessibility rules against it. It does not crawl your site, log in, fill forms or store page content. Only aggregate statistics are ever published, and sites are never named. It waits several seconds between requests and skips any site whose robots.txt disallows automated access.</p>
