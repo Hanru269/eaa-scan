@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WCAG contrast checker with a compliant colour suggestion</title>
+<meta name="description" content="Free WCAG 2.1 contrast checker: enter a text and background colour, see the ratio for AA and AAA, and get the nearest colour that passes."><link rel="canonical" href="https://hanru269.github.io/eaa-scan/contrast-checker.html"><style>:root{--bg:#f7f8fb;--fg:#161d2e;--mut:#59647a;--ac:#0b6e63;--card:#fff;--bd:#dbe1ec;--hi:#e9f5f3}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1420;--fg:#e8edf7;--mut:#9aa7bf;--ac:#4fd1bd;--card:#151d2e;--bd:#26324a;--hi:#12261f}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 Georgia,'Iowan Old Style',serif}
+header,main,footer{max-width:780px;margin:0 auto;padding:0 20px}header{padding-top:22px;display:flex;gap:8px 18px;flex-wrap:wrap;font:600 15px system-ui,sans-serif}
+header a{color:var(--ac);text-decoration:none}h1{font:800 34px/1.15 system-ui,sans-serif;margin:26px 0 8px}h2{font:700 22px system-ui,sans-serif;margin:34px 0 8px}
+p,li{max-width:66ch}a{color:var(--ac)}.lead{font-size:19px;color:var(--mut)}.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;margin:14px 0}
+.cta{display:inline-block;background:var(--ac);color:var(--bg);padding:10px 18px;border-radius:8px;font:700 16px system-ui,sans-serif;text-decoration:none;margin:6px 8px 6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.big{font:800 34px system-ui,sans-serif;color:var(--ac)}
+table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif}td,th{border-bottom:1px solid var(--bd);padding:8px;text-align:left}.tw{overflow-x:auto}.tw:focus-visible,pre:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.note{background:var(--hi);border-left:4px solid var(--ac);padding:10px 14px;border-radius:4px}footer{color:var(--mut);font:14px system-ui,sans-serif;padding:34px 20px 50px}</style></head><body>
+<header><a href="index.html">EAA-Scan</a><a href="guide.html">EAA guide</a><a href="contrast-checker.html">Contrast checker</a><a href="fix-low-contrast.html">Fix contrast</a><a href="alt-text-product-images.html">Alt text</a><a href="study.html">EU shops study</a><a href="bot.html">Scan bot</a></header>
+<main>
+<style>.chip{display:inline-block;width:22px;height:22px;border:1px solid #888;border-radius:4px;vertical-align:middle;margin-right:4px}.sw{display:inline-block;padding:2px 8px;border-radius:4px;border:1px solid #8888;font:600 15px system-ui,sans-serif}label{display:block;font:600 15px system-ui,sans-serif;margin:12px 0 4px}input[type=text]{font:16px ui-monospace,monospace;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--card);color:var(--fg);width:11ch}input[type=color]{width:52px;height:38px;vertical-align:middle;border:1px solid var(--bd);border-radius:6px;background:var(--card)}output{display:block}</style><h1>WCAG contrast checker</h1>
+<p class="lead">Enter a text colour and a background colour. You get the contrast ratio, whether it passes WCAG 2.1 AA and AAA, and the nearest text colour that passes.</p>
+<div class="card"><label for="fg-hex">Text colour</label><input type="color" id="fg-pick" value="#767676" aria-label="Pick text colour"> <input type="text" id="fg-hex" value="#767676" maxlength="7" autocomplete="off">
+<label for="bg-hex">Background colour</label><input type="color" id="bg-pick" value="#ffffff" aria-label="Pick background colour"> <input type="text" id="bg-hex" value="#ffffff" maxlength="7" autocomplete="off">
+<div id="preview" class="sw" style="margin-top:16px;padding:14px 18px;font-size:20px">The quick brown fox jumps over the lazy dog</div>
+<output id="result" aria-live="polite" role="status"></output></div>
+<h2>What the numbers mean</h2><ul><li><b>4.5:1</b> is the AA minimum for normal text (WCAG 1.4.3); <b>3:1</b> for large text (24px, or 19px bold) and for icons and input borders (1.4.11).</li><li><b>7:1</b> is the stricter AAA level.</li></ul>
+<div class="note"><p>This checks colours you enter. To find every low-contrast element on your real pages, <a href="index.html">order a scan</a>. Guide: <a href="fix-low-contrast.html">how to fix low contrast</a>.</p></div>
+<script src="assets/contrast.js"></script><script>
+(function(){var C=window.Contrast;function $(i){return document.getElementById(i)}
+function upd(){var f=C.norm($('fg-hex').value),b=C.norm($('bg-hex').value),o=$('result'),p=$('preview');
+if(!f||!b){o.textContent='Enter colours as 3 or 6 digit hex, for example #767676.';return}
+$('fg-pick').value=f;$('bg-pick').value=b;p.style.color=f;p.style.background=b;
+var r=C.ratio(C.hex2rgb(f),C.hex2rgb(b));function pf(x,n){return (x>=n?'Pass':'Fail')+' ('+n+':1)'}
+var t='Contrast ratio '+r.toFixed(2)+':1. Normal text AA: '+pf(r,4.5)+'. Large text and icons AA: '+pf(r,3)+'. Normal text AAA: '+pf(r,7)+'.';
+if(r<4.5){var s=C.fixColor(f,b,4.5);t+=' Nearest passing text colour for normal text: '+s.hex+' ('+s.ratio.toFixed(2)+':1).'}
+o.textContent=t}
+['fg-hex','bg-hex'].forEach(function(i){$(i).addEventListener('input',upd)});
+$('fg-pick').addEventListener('input',function(e){$('fg-hex').value=e.target.value;upd()});$('bg-pick').addEventListener('input',function(e){$('bg-hex').value=e.target.value;upd()});upd()})();
+</script></main><footer>Automated scans are not legal advice and not a compliance certificate. Built with axe-core. Developer: Hanru Croucamp.</footer></body></html>
